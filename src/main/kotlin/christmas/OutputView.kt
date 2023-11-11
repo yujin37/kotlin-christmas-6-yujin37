@@ -23,15 +23,20 @@ class OutputView {
         println(present)
     }
 
-    fun BenefitMessage(benefits: MutableMap<String, String>){
+    fun BenefitMessage(benefits: MutableMap<String, Int>){
         println("\n<혜택 내역>")
         if(benefits.isNotEmpty()) {
             benefits.forEach { (key, value) ->
-                println("${key}: -${value}원")
+                val valueFormat = CostFormat.format(value)
+                println("${key}: -${valueFormat}원")
             }
         } else {
             println("없음")
         }
     }
 
+    fun totalProfitMessage(totalProfit: String){
+        println("\n<총혜택 금액>")
+        println("-${totalProfit}원")
+    }
 }
