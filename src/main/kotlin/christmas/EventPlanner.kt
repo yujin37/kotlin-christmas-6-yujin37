@@ -11,13 +11,13 @@ class EventPlanner {
         return orderMenu
     }
 
-    fun orderCheck(){
+    fun orderCheck() {
         OutputView().orderList(orderMenu)
         EventDiscount().totalOrder(orderMenu)
     }
 
 
-    fun Management(){
+    fun Management() {
         reservation()
         orderCheck()
     }

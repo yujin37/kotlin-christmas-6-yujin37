@@ -8,11 +8,12 @@ enum class ValidateError(val message: String) {
     INVALID_QUANTITY("[ERROR] 주문 형식이 올바르지 않습니다. 다시 입력해 주세요."),
     INVALID_MENU("[ERROR] 주문 형식이 올바르지 않습니다. 다시 입력해 주세요.")
 }
+
 class EventValidate {
     fun dateValidate(visitDate: String): Int {
         val checkDate = visitDate.toIntOrNull()
-        if (checkDate != null && checkDate in 1..31){
-                return checkDate
+        if (checkDate != null && checkDate in 1..31) {
+            return checkDate
         }
         println(ValidateError.DATE_INVALIDATE.message)
         return -1
@@ -27,8 +28,9 @@ class EventValidate {
             throw IllegalArgumentException(ValidateError.INVALID_QUANTITY.message)
         }
     }
-    fun checkMenu(menuItem: String, quantity: String, menuList: MutableMap<String,Int>) : MutableMap<String,Int> {
-        if(menuItem in menuList) { // 메뉴 입력이 유효한지
+
+    fun checkMenu(menuItem: String, quantity: String, menuList: MutableMap<String, Int>): MutableMap<String, Int> {
+        if (menuItem in menuList) { // 메뉴 입력이 유효한지
             throw IllegalArgumentException(ValidateError.REPEAT_MENU.message)
         } else {
             val quantityInt = validateQuantity(quantity)
@@ -38,7 +40,7 @@ class EventValidate {
     }
 
     fun processMenuItem(item: String, menuList: MutableMap<String, Int>): MutableMap<String, Int> {
-        if(item.contains("-")) {
+        if (item.contains("-")) {
             val (menuItem, quantity) = item.split("-", limit = 2).map { it.trim() }
             return checkMenu(menuItem, quantity, menuList)
         } else {
@@ -46,33 +48,33 @@ class EventValidate {
         }
     }
 
-    fun menuSplit(menu:String): MutableMap<String, Int> { // 메뉴 정보 분리
+    fun menuSplit(menu: String): MutableMap<String, Int> { // 메뉴 정보 분리
         val perMenu = menu.split(",")
         var menuList = mutableMapOf<String, Int>()
-        for(item in perMenu) {
+        for (item in perMenu) {
             menuList = processMenuItem(item, menuList)
         }
         return menuList
     }
 
-    fun menuInList(menu: MutableMap<String, Int>, menuList: List<Menu>){
-        for((menuName,quantity) in menu) { // 메뉴가 있는지 확인
+    fun menuInList(menu: MutableMap<String, Int>, menuList: List<Menu>) {
+        for ((menuName, quantity) in menu) { // 메뉴가 있는지 확인
             val matchingMenu = menuList.find { it.name == menuName }
             if (matchingMenu == null) {
                 throw IllegalArgumentException(ValidateError.NOT_MATCHING_MENU.message)
-            } else if(quantity < 0) {
+            } else if (quantity < 0) {
                 throw IllegalArgumentException(ValidateError.NOT_QUANTITY_BUY.message)
             }
         }
     }
 
-    fun menuValidate(visitMenu: String) : MutableMap<String, Int> {
+    fun menuValidate(visitMenu: String): MutableMap<String, Int> {
 
         try { //메뉴 유효한지 확인하는 첫번째
             val checkedMenu = menuSplit(visitMenu)
             menuInList(checkedMenu, Menu.getMenuList())
             return checkedMenu
-        } catch (e:IllegalArgumentException){
+        } catch (e: IllegalArgumentException) {
             println(e.message)
             return mutableMapOf()
         }
