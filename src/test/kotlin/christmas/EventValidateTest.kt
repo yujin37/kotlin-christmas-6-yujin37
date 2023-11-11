@@ -1,5 +1,6 @@
 package christmas
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -82,6 +83,25 @@ class EventValidateTest {
         }
         assertThrows<IllegalArgumentException> {
             EventValidate().processMenuItem("시저샐러드:2", mutableMapOf())
+        }
+    }
+
+    @Test
+    fun `입력받은 각 정보가 잘 분리되는지 확인`() {
+        val check = EventValidate().menuSplit("티본스테이크-1,제로콜라-2,시저샐러드-1")
+        assertThat(check).isEqualTo(mutableMapOf("티본스테이크" to 1, "제로콜라" to 2, "시저샐러드" to 1))
+    }
+
+    @Test
+    fun `메뉴 매칭 여부, 양 정보 유효한지 확인`() {
+        val menuList = Menu.getMenuList()
+        //메뉴가 메뉴판에 없는 경우
+        assertThrows<IllegalArgumentException> {
+            EventValidate().menuInList(mutableMapOf("티본스테이크" to 1, "제로사이다" to 2, "시저샐러드" to 1), menuList)
+        }
+        //양 정보가 숫자가 아닌 경우
+        assertThrows<IllegalArgumentException> {
+            EventValidate().menuInList(mutableMapOf("티본스테이크" to 1, "제로콜라" to 2, "시저샐러드" to -1), menuList)
         }
     }
 }
