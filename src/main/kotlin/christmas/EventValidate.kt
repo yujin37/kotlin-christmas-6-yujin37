@@ -7,7 +7,8 @@ enum class ValidateError(val message: String) {
     NOT_QUANTITY_BUY("[ERROR] 주문 수량이 0보다 작습니다. 다시 입력해 주세요."),
     INVALID_QUANTITY("[ERROR] 주문 형식이 올바르지 않습니다. 다시 입력해 주세요."),
     INVALID_MENU("[ERROR] 주문 형식이 올바르지 않습니다. 다시 입력해 주세요."),
-    ONLY_DRINK_ORDER("[ERROR] 음료만 주문할 수 없습니다. 다시 입력해 주세요.")
+    ONLY_DRINK_ORDER("[ERROR] 음료만 주문할 수 없습니다. 다시 입력해 주세요."),
+    LIMIT_MENU_ORDER("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문 가능합니다. 다시 입력해 주세요.")
 }
 
 class EventValidate {
@@ -80,12 +81,23 @@ class EventValidate {
         }
     }
 
+    fun menuMax(orderMenu: MutableMap<String, Int>){
+        var quantityCheck = 0
+        orderMenu.forEach{ (_, quantity) ->
+            quantityCheck += quantity
+        }
+        if(quantityCheck >= 20) {
+            throw IllegalArgumentException(ValidateError.LIMIT_MENU_ORDER.message)
+        }
+    }
+
     fun menuValidate(visitMenu: String): MutableMap<String, Int> {
 
         try { //메뉴 유효한지 확인하는 첫번째
             val checkedMenu = menuSplit(visitMenu)
             menuInList(checkedMenu, Menu.getMenuList())
             menuInDrink(checkedMenu, Menu.getMenuList())
+            menuMax(checkedMenu)
             return checkedMenu
         } catch (e: IllegalArgumentException) {
             println(e.message)
