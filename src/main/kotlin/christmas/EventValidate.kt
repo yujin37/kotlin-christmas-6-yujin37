@@ -16,9 +16,9 @@ class EventValidate {
         val checkDate = visitDate.toIntOrNull()
         if (checkDate != null && checkDate in 1..31) {
             return checkDate
+        } else {
+            throw IllegalArgumentException(ValidateError.DATE_INVALIDATE.message)
         }
-        println(ValidateError.DATE_INVALIDATE.message)
-        return -1
 
     }
 
