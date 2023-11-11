@@ -24,6 +24,7 @@ class EventPlanner {
         val totalProfit = EventDetail().benefitDetails(visitDate, totalCost, orderMenu)
         val totalResult = EventDiscount().totalProfitCheck(totalProfit)
         EventDiscount().expectedCost(totalCost, totalResult)
+        EventDetail().eventBadgeCheck(totalResult)
     }
 
 

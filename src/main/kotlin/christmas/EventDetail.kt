@@ -68,4 +68,17 @@ class EventDetail {
 
         return DecEventList
     }
+
+    fun eventBadgeCheck(profitCost: Int) {
+        var badge = "없음"
+        if(profitCost >= 20000) {
+            badge = "산타"
+        } else if(profitCost >= 10000) {
+            badge = "트리"
+        } else if(profitCost >= 5000) {
+            badge = "별"
+        }
+
+        OutputView().eventBadgeMessage(badge)
+    }
 }

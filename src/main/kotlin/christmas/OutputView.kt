@@ -48,4 +48,9 @@ class OutputView {
         println("\n<할인 후 예상 결제 금액>")
         println("${totalPayment}원")
     }
+
+    fun eventBadgeMessage(eventBadge: String) {
+        println("\n<12월 이벤트 배지>")
+        println(eventBadge)
+    }
 }
