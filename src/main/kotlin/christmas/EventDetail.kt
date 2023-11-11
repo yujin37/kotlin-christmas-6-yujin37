@@ -54,6 +54,16 @@ class EventDetail {
                 DecEventList["평일 할인"] = CostFormat.format(weekCost)
             }
         }
+
+        if(date % 7 == 3 || date == 25) {
+            val specialCost = 1000
+            DecEventList["특별 할인"] = CostFormat.format(specialCost)
+        }
+
+        if(totalCost >= 120000) {
+            DecEventList["증정 이벤트"] =  CostFormat.format(25000)
+        }
+
         OutputView().BenefitMessage(DecEventList)
     }
 }
