@@ -18,7 +18,7 @@ class EventDetail {
         var weekendCost = 0
         orderMenu.forEach { (menuName, quantity) ->
             val menu = menuList.find { it.name == menuName }
-            if(menu!!.category == "메인") {
+            if (menu!!.category == "메인") {
                 weekendCost += (quantity * 2023)
             }
         }
@@ -30,7 +30,7 @@ class EventDetail {
         var weekCost = 0
         orderMenu.forEach { (menuName, quantity) ->
             val menu = menuList.find { it.name == menuName }
-            if(menu!!.category == "디저트") {
+            if (menu!!.category == "디저트") {
                 weekCost += (quantity * 2023)
             }
         }
@@ -55,13 +55,13 @@ class EventDetail {
             }
         }
 
-        if(date % 7 == 3 || date == 25) {
+        if (date % 7 == 3 || date == 25) {
             val specialCost = 1000
             DecEventList["특별 할인"] = specialCost
         }
 
-        if(totalCost >= 120000) {
-            DecEventList["증정 이벤트"] =  25000
+        if (totalCost >= 120000) {
+            DecEventList["증정 이벤트"] = 25000
         }
 
         OutputView().BenefitMessage(DecEventList)

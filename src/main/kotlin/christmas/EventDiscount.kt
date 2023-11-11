@@ -16,7 +16,7 @@ class EventDiscount {
 
     fun totalProfitCheck(eventDiscount: MutableMap<String, Int>) {
         var totalDiscount = 0
-        eventDiscount.forEach{ (eventName, discountCost) ->
+        eventDiscount.forEach { (eventName, discountCost) ->
             totalDiscount += discountCost
         }
         OutputView().totalProfitMessage(CostFormat.format(totalDiscount))
