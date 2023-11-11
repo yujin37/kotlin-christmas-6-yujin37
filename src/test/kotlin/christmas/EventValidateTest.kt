@@ -104,4 +104,12 @@ class EventValidateTest {
             EventValidate().menuInList(mutableMapOf("티본스테이크" to 1, "제로콜라" to 2, "시저샐러드" to -1), menuList)
         }
     }
+
+    @Test
+    fun `음료수만 주문할 경우 주문 거절`() {
+        val menuList = Menu.getMenuList()
+        assertThrows<IllegalArgumentException> {
+            EventValidate().menuInDrink(mutableMapOf("레드와인" to 1, "제로콜라" to 2), menuList)
+        }
+    }
 }
