@@ -37,33 +37,35 @@ class EventDetail {
         return weekCost
     }
 
-    fun benefitDetails(date: Int, totalCost: Int, orderMenu: MutableMap<String, Int>) {
-        val DecEventList = mutableMapOf<String, String>()
+    fun benefitDetails(date: Int, totalCost: Int, orderMenu: MutableMap<String, Int>): MutableMap<String, Int> {
+        val DecEventList = mutableMapOf<String, Int>()
         if (date <= 25) {
             val christCost = chiristmasDay(date)
-            DecEventList["크리스마스 디데이 할인"] = CostFormat.format(christCost)
+            DecEventList["크리스마스 디데이 할인"] = christCost
         }
         if (date % 7 == 1 || date % 7 == 2) {
             val weekendCost = weekendDay(date, orderMenu)
             if (weekendCost > 0) {
-                DecEventList["주말 할인"] = CostFormat.format(weekendCost)
+                DecEventList["주말 할인"] = weekendCost
             }
         } else {
             val weekCost = weekDay(date, orderMenu)
             if (weekCost > 0) {
-                DecEventList["평일 할인"] = CostFormat.format(weekCost)
+                DecEventList["평일 할인"] = weekCost
             }
         }
 
         if(date % 7 == 3 || date == 25) {
             val specialCost = 1000
-            DecEventList["특별 할인"] = CostFormat.format(specialCost)
+            DecEventList["특별 할인"] = specialCost
         }
 
         if(totalCost >= 120000) {
-            DecEventList["증정 이벤트"] =  CostFormat.format(25000)
+            DecEventList["증정 이벤트"] =  25000
         }
 
         OutputView().BenefitMessage(DecEventList)
+
+        return DecEventList
     }
 }
