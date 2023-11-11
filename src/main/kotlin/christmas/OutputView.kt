@@ -37,7 +37,11 @@ class OutputView {
 
     fun totalProfitMessage(totalProfit: String) {
         println("\n<총혜택 금액>")
-        println("-${totalProfit}원")
+        if(totalProfit > "0") {
+            println("-${totalProfit}원")
+        } else{
+            println("0원")
+        }
     }
 
     fun expectCostMessage(totalPayment: String) {
