@@ -20,9 +20,16 @@ class EventPlanner {
     }
 
     fun eventCheck() {
-        EventDetail().presentEvent(totalCost)
-        val totalProfit = EventDetail().benefitDetails(visitDate, totalCost, orderMenu)
-        val totalResult = EventDiscount().totalProfitCheck(totalProfit)
+        var totalResult = 0
+        if(totalCost>=10000) {
+            EventDetail().presentEvent(totalCost)
+            val totalProfit = EventDetail().benefitDetails(visitDate, totalCost, orderMenu)
+            totalResult = EventDiscount().totalProfitCheck(totalProfit)
+        } else {
+            OutputView().presentMessage("없음")
+            OutputView().BenefitMessage(mutableMapOf())
+            OutputView().totalProfitMessage("0")
+        }
         EventDiscount().expectedCost(totalCost, totalResult)
         EventDetail().eventBadgeCheck(totalResult)
     }
