@@ -5,7 +5,8 @@ enum class ValidateError(val message: String) {
     REPEAT_MENU("[ERROR] 중복된 주문입니다. 다시 입력해 주세요."),
     NOT_MATCHING_MENU("[ERROR] 메뉴판에 없는 주문입니다. 다시 입력해 주세요."),
     NOT_QUANTITY_BUY("[ERROR] 주문 수량이 0보다 작습니다. 다시 입력해 주세요."),
-    INVALID_QUANTITY("[ERROR] 주문 형식이 올바르지 않습니다. 다시 입력해 주세요.")
+    INVALID_QUANTITY("[ERROR] 주문 형식이 올바르지 않습니다. 다시 입력해 주세요."),
+    INVALID_MENU("[ERROR] 주문 형식이 올바르지 않습니다. 다시 입력해 주세요.")
 }
 class EventValidate {
     fun dateValidate(visitDate: String): Int {
@@ -36,12 +37,20 @@ class EventValidate {
         return menuList
     }
 
+    fun processMenuItem(item: String, menuList: MutableMap<String, Int>): MutableMap<String, Int> {
+        if(item.contains("-")) {
+            val (menuItem, quantity) = item.split("-", limit = 2).map { it.trim() }
+            return checkMenu(menuItem, quantity, menuList)
+        } else {
+            throw IllegalArgumentException(ValidateError.INVALID_MENU.message)
+        }
+    }
+
     fun menuSplit(menu:String): MutableMap<String, Int> { // 메뉴 정보 분리
         val perMenu = menu.split(",")
         var menuList = mutableMapOf<String, Int>()
         for(item in perMenu) {
-            val (menuItem, quantity) = item.split("-", limit = 2).map { it.trim() }
-            menuList = checkMenu(menuItem, quantity, menuList)
+            menuList = processMenuItem(item, menuList)
         }
         return menuList
     }
