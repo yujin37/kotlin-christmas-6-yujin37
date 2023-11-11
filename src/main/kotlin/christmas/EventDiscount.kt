@@ -14,11 +14,19 @@ class EventDiscount {
         return totalCost
     }
 
-    fun totalProfitCheck(eventDiscount: MutableMap<String, Int>) {
+    fun totalProfitCheck(eventDiscount: MutableMap<String, Int>): Int {
         var totalDiscount = 0
         eventDiscount.forEach { (eventName, discountCost) ->
             totalDiscount += discountCost
         }
         OutputView().totalProfitMessage(CostFormat.format(totalDiscount))
+
+        return totalDiscount
+    }
+
+    fun expectedCost(totalCost: Int, totalDiscount: Int) {
+        var expectDiscount = totalCost - totalDiscount
+        if(totalCost >= 120000) expectDiscount += 25000
+        OutputView().expectCostMessage(CostFormat.format(expectDiscount))
     }
 }

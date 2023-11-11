@@ -22,7 +22,8 @@ class EventPlanner {
     fun eventCheck() {
         EventDetail().presentEvent(totalCost)
         val totalProfit = EventDetail().benefitDetails(visitDate, totalCost, orderMenu)
-        EventDiscount().totalProfitCheck(totalProfit)
+        val totalResult = EventDiscount().totalProfitCheck(totalProfit)
+        EventDiscount().expectedCost(totalCost, totalResult)
     }
 
 

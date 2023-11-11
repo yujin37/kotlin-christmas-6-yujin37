@@ -39,4 +39,9 @@ class OutputView {
         println("\n<총혜택 금액>")
         println("-${totalProfit}원")
     }
+
+    fun expectCostMessage(totalPayment: String) {
+        println("\n<할인 후 예상 결제 금액>")
+        println("${totalPayment}원")
+    }
 }
