@@ -23,4 +23,11 @@ class OutputView {
         println(present)
     }
 
+    fun BenefitMessage(benefits: MutableMap<String, String>){
+        println("<혜택 내역>")
+        benefits.forEach { (key, value) ->
+            println("${key}: -${value}원")
+        }
+    }
+
 }

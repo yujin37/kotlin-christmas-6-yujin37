@@ -21,6 +21,7 @@ class EventPlanner {
 
     fun eventCheck() {
         EventDetail().presentEvent(totalCost)
+        EventDetail().benefitDetails(visitDate, totalCost, orderMenu)
     }
 
 
