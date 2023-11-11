@@ -68,4 +68,20 @@ class EventValidateTest {
             EventValidate().checkMenu("시저샐러드", "1", mutableMapOf("시저샐러드" to 1, "레드와인" to 2))
         }
     }
+
+    @Test
+    fun `입력 받은 메뉴정보가 형식에 맞지 않으면 에러 발생`() {
+        assertThrows<IllegalArgumentException> {
+            EventValidate().processMenuItem("시저샐러드-2-티본스테이크", mutableMapOf())
+        }
+        assertThrows<IllegalArgumentException> {
+            EventValidate().processMenuItem("시저샐러드-티본스테이크-2", mutableMapOf())
+        }
+        assertThrows<IllegalArgumentException> {
+            EventValidate().processMenuItem("시저샐러드-2개", mutableMapOf())
+        }
+        assertThrows<IllegalArgumentException> {
+            EventValidate().processMenuItem("시저샐러드:2", mutableMapOf())
+        }
+    }
 }
