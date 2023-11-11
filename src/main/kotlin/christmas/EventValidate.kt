@@ -74,19 +74,19 @@ class EventValidate {
         var drinkCheck = 0
         orderMenu.forEach { (menuName, quantity) ->
             val menu = menuList.find { it.name == menuName }
-            if(menu!!.category == "음료") drinkCheck += 1
+            if (menu!!.category == "음료") drinkCheck += 1
         }
-        if(drinkCheck == orderMenu.size){
+        if (drinkCheck == orderMenu.size) {
             throw IllegalArgumentException(ValidateError.ONLY_DRINK_ORDER.message)
         }
     }
 
-    fun menuMax(orderMenu: MutableMap<String, Int>){
+    fun menuMax(orderMenu: MutableMap<String, Int>) {
         var quantityCheck = 0
-        orderMenu.forEach{ (_, quantity) ->
+        orderMenu.forEach { (_, quantity) ->
             quantityCheck += quantity
         }
-        if(quantityCheck >= 20) {
+        if (quantityCheck >= 20) {
             throw IllegalArgumentException(ValidateError.LIMIT_MENU_ORDER.message)
         }
     }

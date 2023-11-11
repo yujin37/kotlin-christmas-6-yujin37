@@ -19,7 +19,7 @@ class EventPlanner {
         totalCost = EventDiscount().totalOrder(orderMenu)
     }
 
-    fun eventCheck(){
+    fun eventCheck() {
         EventDetail().presentEvent(totalCost)
     }
 

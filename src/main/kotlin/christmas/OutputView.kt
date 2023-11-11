@@ -18,7 +18,7 @@ class OutputView {
         println("${cost}원")
     }
 
-    fun presentMessage(present: String){
+    fun presentMessage(present: String) {
         println("\n<증정 메뉴>")
         println(present)
     }
