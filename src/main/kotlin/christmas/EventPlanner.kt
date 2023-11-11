@@ -1,5 +1,6 @@
 package christmas
 
+
 class EventPlanner {
 
     private var visitDate: Int = 0
@@ -16,6 +17,9 @@ class EventPlanner {
     fun orderCheck() {
         OutputView().orderList(orderMenu)
         totalCost = EventDiscount().totalOrder(orderMenu)
+    }
+
+    fun eventCheck(){
         EventDetail().presentEvent(totalCost)
     }
 
@@ -23,5 +27,6 @@ class EventPlanner {
     fun Management() {
         reservation()
         orderCheck()
+        eventCheck()
     }
 }
