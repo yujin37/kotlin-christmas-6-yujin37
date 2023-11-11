@@ -21,7 +21,7 @@ class EventPlanner {
 
     fun eventCheck() {
         var totalResult = 0
-        if(totalCost>=10000) {
+        if (totalCost >= 10000) {
             EventDetail().presentEvent(totalCost)
             val totalProfit = EventDetail().benefitDetails(visitDate, totalCost, orderMenu)
             totalResult = EventDiscount().totalProfitCheck(totalProfit)

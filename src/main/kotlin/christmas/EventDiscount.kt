@@ -26,7 +26,7 @@ class EventDiscount {
 
     fun expectedCost(totalCost: Int, totalDiscount: Int) {
         var expectDiscount = totalCost - totalDiscount
-        if(totalCost >= 120000) expectDiscount += 25000
+        if (totalCost >= 120000) expectDiscount += 25000
         OutputView().expectCostMessage(CostFormat.format(expectDiscount))
     }
 }
