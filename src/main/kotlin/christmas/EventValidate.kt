@@ -66,16 +66,15 @@ class EventValidate {
         }
     }
 
-    fun menuValidate(visitMenu: String) {
+    fun menuValidate(visitMenu: String) : MutableMap<String, Int> {
 
         try { //메뉴 유효한지 확인하는 첫번째
             val checkedMenu = menuSplit(visitMenu)
             menuInList(checkedMenu, Menu.getMenuList())
-            println("성공" + checkedMenu)
+            return checkedMenu
         } catch (e:IllegalArgumentException){
             println(e.message)
+            return mutableMapOf()
         }
-
-
     }
 }
