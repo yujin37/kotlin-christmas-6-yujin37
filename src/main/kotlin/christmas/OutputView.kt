@@ -12,4 +12,9 @@ class OutputView {
             println("${key} ${value}개")
         }
     }
+
+    fun beforeDiscount(cost: String?) {
+        println("\n<할인 전 총주문 금액>")
+        println("${cost}원")
+    }
 }

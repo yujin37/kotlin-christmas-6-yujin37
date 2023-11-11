@@ -13,6 +13,7 @@ class EventPlanner {
 
     fun orderCheck(){
         OutputView().orderList(orderMenu)
+        EventDiscount().totalOrder(orderMenu)
     }
 
 
