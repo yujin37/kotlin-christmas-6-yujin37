@@ -7,7 +7,7 @@ class OutputView {
     }
 
     fun orderList(orderMenu: MutableMap<String,Int>){
-        println("<주문 메뉴>")
+        println("\n<주문 메뉴>")
         orderMenu.forEach { (key, value) ->
             println("${key} ${value}개")
         }
