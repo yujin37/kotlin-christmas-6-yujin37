@@ -25,8 +25,12 @@ class OutputView {
 
     fun BenefitMessage(benefits: MutableMap<String, String>){
         println("\n<혜택 내역>")
-        benefits.forEach { (key, value) ->
-            println("${key}: -${value}원")
+        if(benefits.isNotEmpty()) {
+            benefits.forEach { (key, value) ->
+                println("${key}: -${value}원")
+            }
+        } else {
+            println("없음")
         }
     }
 
