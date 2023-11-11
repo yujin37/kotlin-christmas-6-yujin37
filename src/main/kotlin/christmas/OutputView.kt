@@ -17,4 +17,10 @@ class OutputView {
         println("\n<할인 전 총주문 금액>")
         println("${cost}원")
     }
+
+    fun presentMessage(present: String){
+        println("\n<증정 메뉴>")
+        println(present)
+    }
+
 }
