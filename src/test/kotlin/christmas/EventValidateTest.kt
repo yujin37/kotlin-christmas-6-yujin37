@@ -112,4 +112,11 @@ class EventValidateTest {
             EventValidate().menuInDrink(mutableMapOf("레드와인" to 1, "제로콜라" to 2), menuList)
         }
     }
+
+    @Test
+    fun `최대 주문 수량 초과할 경우 주문 거절`() {
+        assertThrows<IllegalArgumentException> {
+            EventValidate().menuMax(mutableMapOf("티본스테이크" to 21, "제로콜라" to 2))
+        }
+    }
 }
