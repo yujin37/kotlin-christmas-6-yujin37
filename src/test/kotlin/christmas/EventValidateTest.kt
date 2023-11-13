@@ -119,4 +119,13 @@ class EventValidateTest {
             EventValidate().menuMax(mutableMapOf("티본스테이크" to 21, "제로콜라" to 2))
         }
     }
+
+    @Test
+    fun `주말 할인, 평일 할인 적용 확인`() {
+        val check = EventBenefitCalculator().benefitDetails(29, 100000,mutableMapOf("해산물파스타" to 2, "초코케이크" to 2))
+        assertThat(check).isEqualTo(mutableMapOf("주말 할인" to 4046))
+        val check2 = EventBenefitCalculator().benefitDetails(28, 100000,mutableMapOf("해산물파스타" to 2, "초코케이크" to 2))
+        assertThat(check2).isEqualTo(mutableMapOf("평일 할인" to 4046))
+
+    }
 }
