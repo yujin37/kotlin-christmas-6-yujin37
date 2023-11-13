@@ -23,9 +23,9 @@ class EventPlanner {
     }
 
     private fun eventCheck() {
-        val totalResult = 0
+        var totalResult = 0
         if (totalCost >= MIN_COST_FOR_EVENT) {
-            handleEventApply()
+            totalResult = handleEventApply()
         } else {
             handleNotApply()
         }
@@ -33,10 +33,10 @@ class EventPlanner {
         EventBenefitCalculator().eventBadgeCheck(totalResult)
     }
 
-    private fun handleEventApply() {
+    private fun handleEventApply(): Int {
         SpecialEvent().presentEvent(totalCost)
         val totalProfit = EventBenefitCalculator().benefitDetails(visitDate, totalCost, orderMenu)
-        EventCalculator().totalDiscountCost(totalProfit)
+        return EventCalculator().totalDiscountCost(totalProfit)
     }
 
     private fun handleNotApply() {
