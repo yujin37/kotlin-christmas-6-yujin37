@@ -21,30 +21,27 @@ class EventValidate {
 
     fun dateValidate(visitDate: String): Int {
         val checkDate = visitDate.toIntOrNull()
-        if (checkDate != null && checkDate in DEC_MONTH_START..DEC_MONTH_END) {
-            return checkDate
-        } else {
-            throw IllegalArgumentException(ValidateError.DATE_INVALIDATE.message)
+        require(checkDate != null && checkDate in DEC_MONTH_START..DEC_MONTH_END) {
+            ValidateError.DATE_INVALIDATE.message
         }
-
+        return checkDate
     }
 
     fun validateQuantity(quantity: String): Int { // 양 입력이 유효한지
         val quantityInt = quantity.toIntOrNull()
-        if (quantityInt != null) {
-            return quantityInt
-        } else {
-            throw IllegalArgumentException(ValidateError.INVALID_QUANTITY.message)
+        require (quantityInt != null) {
+            ValidateError.INVALID_QUANTITY.message
         }
+        return quantityInt
     }
 
     fun checkMenu(menuItem: String, quantity: String, menuList: MutableMap<String, Int>): MutableMap<String, Int> {
-        if (menuItem in menuList) { // 메뉴 입력이 유효한지
-            throw IllegalArgumentException(ValidateError.REPEAT_MENU.message)
-        } else {
-            val quantityInt = validateQuantity(quantity)
-            menuList[menuItem] = quantityInt
+        require (menuItem !in menuList) { // 메뉴 입력이 유효한지
+            ValidateError.REPEAT_MENU.message
         }
+        val quantityInt = validateQuantity(quantity)
+        menuList[menuItem] = quantityInt
+
         return menuList
     }
 
@@ -52,10 +49,11 @@ class EventValidate {
     fun menuInList(menu: MutableMap<String, Int>, menuList: List<Menu>) {
         for ((menuName, quantity) in menu) { // 메뉴가 있는지 확인
             val matchingMenu = menuList.find { it.name == menuName }
-            if (matchingMenu == null) {
-                throw IllegalArgumentException(ValidateError.NOT_MATCHING_MENU.message)
-            } else if (quantity < 0) {
-                throw IllegalArgumentException(ValidateError.NOT_QUANTITY_BUY.message)
+            require (matchingMenu != null) {
+                ValidateError.NOT_MATCHING_MENU.message
+            }
+            require (quantity >= 0) {
+                ValidateError.NOT_QUANTITY_BUY.message
             }
         }
     }
@@ -66,9 +64,11 @@ class EventValidate {
             val menu = menuList.find { it.name == menuName }
             if (menu!!.category == "음료") drinkCheck += 1
         }
-        if (drinkCheck == orderMenu.size) {
-            throw IllegalArgumentException(ValidateError.ONLY_DRINK_ORDER.message)
+        require(drinkCheck != orderMenu.size) {
+            ValidateError.ONLY_DRINK_ORDER.message
         }
+
+
     }
 
     fun menuMax(orderMenu: MutableMap<String, Int>) {
@@ -76,8 +76,8 @@ class EventValidate {
         orderMenu.forEach { (_, quantity) ->
             quantityCheck += quantity
         }
-        if (quantityCheck >= LIMIT_PER_ORDER_QUANTITY) {
-            throw IllegalArgumentException(ValidateError.LIMIT_MENU_ORDER.message)
+        require(quantityCheck < LIMIT_PER_ORDER_QUANTITY) {
+            ValidateError.LIMIT_MENU_ORDER.message
         }
     }
 
@@ -86,6 +86,5 @@ class EventValidate {
         menuInDrink(checkedMenu, Menu.getMenuList())
         menuMax(checkedMenu)
     }
-
 
 }
