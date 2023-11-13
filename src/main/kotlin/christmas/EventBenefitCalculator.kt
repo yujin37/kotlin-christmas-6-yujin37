@@ -14,11 +14,11 @@ class EventBenefitCalculator {
         const val CHRISTMAS_DAY = 25
     }
 
-    fun isWeekend(date: Int): Boolean {
+    private fun isWeekend(date: Int): Boolean {
         return date % 7 == 1 || date % 7 == 2
     }
 
-    fun isSpecialDay(date: Int): Boolean {
+    private fun isSpecialDay(date: Int): Boolean {
         return date % 7 == 3 || date == CHRISTMAS_DAY
     }
 
