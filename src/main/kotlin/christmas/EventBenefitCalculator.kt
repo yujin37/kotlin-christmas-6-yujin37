@@ -49,7 +49,7 @@ class EventBenefitCalculator {
             DecEventList["증정 이벤트"] = PRESENT_EVENT_COST
         }
 
-        OutputView().BenefitMessage(DecEventList)
+        OutputView().benefitMessage(DecEventList)
 
         return DecEventList
     }

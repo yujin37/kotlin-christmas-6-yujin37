@@ -23,7 +23,7 @@ class OutputView {
         println(present)
     }
 
-    fun BenefitMessage(benefits: MutableMap<String, Int>) {
+    fun benefitMessage(benefits: MutableMap<String, Int>) {
         println("\n<혜택 내역>")
         if (benefits.isNotEmpty()) {
             benefits.forEach { (key, value) ->
