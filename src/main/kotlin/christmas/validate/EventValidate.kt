@@ -20,7 +20,7 @@ class EventValidate {
 
     fun validateQuantity(quantity: String): Int { // 양 입력이 유효한지
         val quantityInt = quantity.toIntOrNull()
-        require(quantityInt != null) {
+        require(quantityInt != null && quantityInt > 0) {
             ValidateError.INVALID_QUANTITY.message
         }
         return quantityInt
