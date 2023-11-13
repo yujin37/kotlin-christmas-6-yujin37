@@ -1,7 +1,7 @@
 package christmas
 
 class WeeklyEvent {
-    fun weekendDay(date: Int, orderMenu: MutableMap<String, Int>): Int {
+    fun weekendDay(orderMenu: MutableMap<String, Int>): Int {
         val menuList = Menu.getMenuList()
         var weekendCost = 0
         orderMenu.forEach { (menuName, quantity) ->
@@ -13,7 +13,7 @@ class WeeklyEvent {
         return weekendCost
     }
 
-    fun weekDay(date: Int, orderMenu: MutableMap<String, Int>): Int {
+    fun weekDay(orderMenu: MutableMap<String, Int>): Int {
         val menuList = Menu.getMenuList()
         var weekCost = 0
         orderMenu.forEach { (menuName, quantity) ->

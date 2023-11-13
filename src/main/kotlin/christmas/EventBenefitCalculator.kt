@@ -29,12 +29,12 @@ class EventBenefitCalculator {
             DecEventList["크리스마스 디데이 할인"] = christCost
         }
         if (isWeekend(date)) {
-            val weekendCost = WeeklyEvent().weekendDay(date, orderMenu)
+            val weekendCost = WeeklyEvent().weekendDay(orderMenu)
             if (weekendCost > 0) {
                 DecEventList["주말 할인"] = weekendCost
             }
         } else {
-            val weekCost = WeeklyEvent().weekDay(date, orderMenu)
+            val weekCost = WeeklyEvent().weekDay(orderMenu)
             if (weekCost > 0) {
                 DecEventList["평일 할인"] = weekCost
             }
