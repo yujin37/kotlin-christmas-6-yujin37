@@ -1,6 +1,6 @@
 package christmas
 
-class OrderProcess {
+class OrderProcessor {
     fun calculateOrder(orderMenu: MutableMap<String, Int>): Int {
         var totalCost = 0
         val menuList = Menu.getMenuList()
