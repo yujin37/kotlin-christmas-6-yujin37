@@ -19,7 +19,7 @@ class EventPlanner {
 
     private fun orderCheck() {
         OutputView().orderList(orderMenu)
-        totalCost = OrderProcess().calculateOrder(orderMenu)
+        totalCost = OrderProcessor().calculateOrder(orderMenu)
     }
 
     private fun eventCheck() {
@@ -32,6 +32,7 @@ class EventPlanner {
         EventCalculator().expectedCost(totalCost, totalResult)
         EventBenefitCalculator().eventBadgeCheck(totalResult)
     }
+
     private fun handleEventApply() {
         SpecialEvent().presentEvent(totalCost)
         val totalProfit = EventBenefitCalculator().benefitDetails(visitDate, totalCost, orderMenu)
