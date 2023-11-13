@@ -20,14 +20,14 @@ class EventValidate {
 
     fun validateQuantity(quantity: String): Int { // 양 입력이 유효한지
         val quantityInt = quantity.toIntOrNull()
-        require (quantityInt != null) {
+        require(quantityInt != null) {
             ValidateError.INVALID_QUANTITY.message
         }
         return quantityInt
     }
 
     fun checkMenu(menuItem: String, quantity: String, menuList: MutableMap<String, Int>): MutableMap<String, Int> {
-        require (menuItem !in menuList) { // 메뉴 입력이 유효한지
+        require(menuItem !in menuList) { // 메뉴 입력이 유효한지
             ValidateError.REPEAT_MENU.message
         }
         val quantityInt = validateQuantity(quantity)
@@ -40,10 +40,10 @@ class EventValidate {
     fun menuInList(menu: MutableMap<String, Int>, menuList: List<Menu>) {
         for ((menuName, quantity) in menu) { // 메뉴가 있는지 확인
             val matchingMenu = menuList.find { it.name == menuName }
-            require (matchingMenu != null) {
+            require(matchingMenu != null) {
                 ValidateError.NOT_MATCHING_MENU.message
             }
-            require (quantity >= 0) {
+            require(quantity >= 0) {
                 ValidateError.NOT_QUANTITY_BUY.message
             }
         }

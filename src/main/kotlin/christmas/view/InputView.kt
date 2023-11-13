@@ -1,8 +1,8 @@
 package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
-import christmas.validate.EventValidate
 import christmas.processor.MenuProcessor
+import christmas.validate.EventValidate
 
 class InputView {
 
@@ -14,7 +14,7 @@ class InputView {
                 val input = Console.readLine()
                 val checkInput = EventValidate().dateValidate(input)
                 return checkInput
-            } catch(e:IllegalArgumentException) {
+            } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
