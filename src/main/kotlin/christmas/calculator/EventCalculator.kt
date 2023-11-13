@@ -21,7 +21,7 @@ class EventCalculator {
         OutputView().expectCostMessage(CostFormat.format(expectDiscount))
     }
 
-    private fun calculateExpectedCost(totalCost: Int, totalDiscount: Int): Int {
+    fun calculateExpectedCost(totalCost: Int, totalDiscount: Int): Int {
         var expectDiscount = totalCost - totalDiscount
         if (totalCost >= EXPECT_PLUS_MIN) expectDiscount += EXPECT_PLUS_AMOUNT
         return expectDiscount
