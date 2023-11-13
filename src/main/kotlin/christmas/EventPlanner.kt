@@ -16,7 +16,7 @@ class EventPlanner {
 
     fun orderCheck() {
         OutputView().orderList(orderMenu)
-        totalCost = EventDiscount().totalOrder(orderMenu)
+        totalCost = OrderProcess().calculateOrder(orderMenu)
     }
 
     fun eventCheck() {
@@ -24,13 +24,13 @@ class EventPlanner {
         if (totalCost >= 10000) {
             SpecialEvent().presentEvent(totalCost)
             val totalProfit = EventBenefitCalculator().benefitDetails(visitDate, totalCost, orderMenu)
-            totalResult = EventDiscount().totalProfitCheck(totalProfit)
+            totalResult = EventCalculator().totalDiscountCost(totalProfit)
         } else {
             OutputView().presentMessage("없음")
             OutputView().BenefitMessage(mutableMapOf())
             OutputView().totalProfitMessage("0")
         }
-        EventDiscount().expectedCost(totalCost, totalResult)
+        EventCalculator().expectedCost(totalCost, totalResult)
         EventBenefitCalculator().eventBadgeCheck(totalResult)
     }
 
