@@ -1,13 +1,22 @@
 package christmas
 
 class EventBenefitCalculator {
+
+    fun isWeekend(date: Int): Boolean {
+        return date % 7 == 1 || date % 7 == 2
+    }
+
+    fun isSpecialDay(date: Int): Boolean {
+        return date % 7 == 3 || date == 25
+    }
+
     fun benefitDetails(date: Int, totalCost: Int, orderMenu: MutableMap<String, Int>): MutableMap<String, Int> {
         val DecEventList = mutableMapOf<String, Int>()
         if (date <= 25) {
             val christCost = SpecialEvent().chiristmasDay(date)
             DecEventList["크리스마스 디데이 할인"] = christCost
         }
-        if (date % 7 == 1 || date % 7 == 2) {
+        if (isWeekend(date)) {
             val weekendCost = WeeklyEvent().weekendDay(date, orderMenu)
             if (weekendCost > 0) {
                 DecEventList["주말 할인"] = weekendCost
@@ -19,7 +28,7 @@ class EventBenefitCalculator {
             }
         }
 
-        if (date % 7 == 3 || date == 25) {
+        if (isSpecialDay(date)) {
             val specialCost = 1000
             DecEventList["특별 할인"] = specialCost
         }
