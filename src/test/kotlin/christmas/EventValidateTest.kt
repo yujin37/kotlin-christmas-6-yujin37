@@ -69,6 +69,11 @@ class EventValidateTest {
         assertThrows<IllegalArgumentException> {
             validateLink.validateQuantity("2.1")
         }
+
+        // Long인 경우
+        assertThrows<IllegalArgumentException> {
+            validateLink.validateQuantity("1L")
+        }
     }
 
     @Test
