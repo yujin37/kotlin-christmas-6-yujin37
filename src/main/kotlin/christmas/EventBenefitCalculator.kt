@@ -25,7 +25,7 @@ class EventBenefitCalculator {
     fun benefitDetails(date: Int, totalCost: Int, orderMenu: MutableMap<String, Int>): MutableMap<String, Int> {
         val DecEventList = mutableMapOf<String, Int>()
         if (date <= CHRISTMAS_DAY) {
-            val christCost = SpecialEvent().chiristmasDay(date)
+            val christCost = SpecialEvent().christmasDay(date)
             DecEventList["크리스마스 디데이 할인"] = christCost
         }
         if (isWeekend(date)) {

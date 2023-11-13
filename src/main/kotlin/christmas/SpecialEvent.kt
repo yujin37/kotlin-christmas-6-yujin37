@@ -9,7 +9,7 @@ class SpecialEvent {
         }
     }
 
-    fun chiristmasDay(date: Int): Int {
+    fun christmasDay(date: Int): Int {
         return 1000 + (100 * (date - 1))
     }
 }
