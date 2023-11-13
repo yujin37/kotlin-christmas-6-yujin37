@@ -8,6 +8,7 @@ class MenuProcessor {
     }
 
     fun processMenuItem(item: String, menuList: MutableMap<String, Int>): MutableMap<String, Int> {
+        require(!item.contains(" ")) { ValidateError.IS_BLANK_MENU.message }
         if (item.contains("-")) {
             val (menuItem, quantity) = item.split(SEPERATE_ITEM_TOOL, limit = 2).map { it.trim() }
             return EventValidate().checkMenu(menuItem, quantity, menuList)
