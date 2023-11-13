@@ -54,6 +54,21 @@ class EventValidateTest {
         assertThrows<IllegalArgumentException> {
             validateLink.validateQuantity(":")
         }
+
+        // 0인 경우
+        assertThrows<IllegalArgumentException> {
+            validateLink.validateQuantity("0")
+        }
+
+        // -1인경우
+        assertThrows<IllegalArgumentException> {
+            validateLink.validateQuantity("-1")
+        }
+
+        // 소수점인 경우
+        assertThrows<IllegalArgumentException> {
+            validateLink.validateQuantity("2.1")
+        }
     }
 
     @Test
@@ -69,7 +84,6 @@ class EventValidateTest {
             EventValidate().checkMenu("시저샐러드", "1", mutableMapOf("시저샐러드" to 1, "레드와인" to 2))
         }
     }
-
 
 
     @Test
