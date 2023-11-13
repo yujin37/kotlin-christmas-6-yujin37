@@ -73,22 +73,22 @@ class EventValidateTest {
     @Test
     fun `입력 받은 메뉴정보가 형식에 맞지 않으면 에러 발생`() {
         assertThrows<IllegalArgumentException> {
-            EventValidate().processMenuItem("시저샐러드-2-티본스테이크", mutableMapOf())
+            MenuProcessor().processMenuItem("시저샐러드-2-티본스테이크", mutableMapOf())
         }
         assertThrows<IllegalArgumentException> {
-            EventValidate().processMenuItem("시저샐러드-티본스테이크-2", mutableMapOf())
+            MenuProcessor().processMenuItem("시저샐러드-티본스테이크-2", mutableMapOf())
         }
         assertThrows<IllegalArgumentException> {
-            EventValidate().processMenuItem("시저샐러드-2개", mutableMapOf())
+            MenuProcessor().processMenuItem("시저샐러드-2개", mutableMapOf())
         }
         assertThrows<IllegalArgumentException> {
-            EventValidate().processMenuItem("시저샐러드:2", mutableMapOf())
+            MenuProcessor().processMenuItem("시저샐러드:2", mutableMapOf())
         }
     }
 
     @Test
     fun `입력받은 각 정보가 잘 분리되는지 확인`() {
-        val check = EventValidate().menuSplit("티본스테이크-1,제로콜라-2,시저샐러드-1")
+        val check = MenuProcessor().menuSplit("티본스테이크-1,제로콜라-2,시저샐러드-1")
         assertThat(check).isEqualTo(mutableMapOf("티본스테이크" to 1, "제로콜라" to 2, "시저샐러드" to 1))
     }
 

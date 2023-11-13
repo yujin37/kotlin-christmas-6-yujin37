@@ -12,9 +12,16 @@ enum class ValidateError(val message: String) {
 }
 
 class EventValidate {
+
+    companion object {
+        const val LIMIT_PER_ORDER_QUANTITY = 20
+        const val DEC_MONTH_START = 1
+        const val DEC_MONTH_END = 31
+    }
+
     fun dateValidate(visitDate: String): Int {
         val checkDate = visitDate.toIntOrNull()
-        if (checkDate != null && checkDate in 1..31) {
+        if (checkDate != null && checkDate in DEC_MONTH_START..DEC_MONTH_END) {
             return checkDate
         } else {
             throw IllegalArgumentException(ValidateError.DATE_INVALIDATE.message)
@@ -41,23 +48,6 @@ class EventValidate {
         return menuList
     }
 
-    fun processMenuItem(item: String, menuList: MutableMap<String, Int>): MutableMap<String, Int> {
-        if (item.contains("-")) {
-            val (menuItem, quantity) = item.split("-", limit = 2).map { it.trim() }
-            return checkMenu(menuItem, quantity, menuList)
-        } else {
-            throw IllegalArgumentException(ValidateError.INVALID_MENU.message)
-        }
-    }
-
-    fun menuSplit(menu: String): MutableMap<String, Int> { // 메뉴 정보 분리
-        val perMenu = menu.split(",")
-        var menuList = mutableMapOf<String, Int>()
-        for (item in perMenu) {
-            menuList = processMenuItem(item, menuList)
-        }
-        return menuList
-    }
 
     fun menuInList(menu: MutableMap<String, Int>, menuList: List<Menu>) {
         for ((menuName, quantity) in menu) { // 메뉴가 있는지 확인
@@ -86,22 +76,25 @@ class EventValidate {
         orderMenu.forEach { (_, quantity) ->
             quantityCheck += quantity
         }
-        if (quantityCheck >= 20) {
+        if (quantityCheck >= LIMIT_PER_ORDER_QUANTITY) {
             throw IllegalArgumentException(ValidateError.LIMIT_MENU_ORDER.message)
         }
     }
 
-    fun menuValidate(visitMenu: String): MutableMap<String, Int> {
+    private fun validateMenu(checkedMenu: MutableMap<String, Int>) {
+        menuInList(checkedMenu, Menu.getMenuList())
+        menuInDrink(checkedMenu, Menu.getMenuList())
+        menuMax(checkedMenu)
+    }
 
-        try { //메뉴 유효한지 확인하는 첫번째
-            val checkedMenu = menuSplit(visitMenu)
-            menuInList(checkedMenu, Menu.getMenuList())
-            menuInDrink(checkedMenu, Menu.getMenuList())
-            menuMax(checkedMenu)
-            return checkedMenu
+    fun menuValidate(visitMenu: String): MutableMap<String, Int> {
+        return try { //메뉴 유효한지 확인하는 첫번째
+            val checkedMenu = MenuProcessor().menuSplit(visitMenu)
+            validateMenu(checkedMenu)
+            checkedMenu
         } catch (e: IllegalArgumentException) {
             println(e.message)
-            return mutableMapOf()
+            mutableMapOf()
         }
     }
 }
