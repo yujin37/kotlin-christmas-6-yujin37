@@ -19,7 +19,7 @@ class MenuProcessor {
     fun menuSplit(menu: String): MutableMap<String, Int> { // 메뉴 정보 분리
         val perMenu = menu.split(SEPERATE_MENU_TOOL)
         var menuList = mutableMapOf<String, Int>()
-        for (item in perMenu) {
+        perMenu.forEach { item ->
             menuList = processMenuItem(item, menuList)
         }
         return menuList
