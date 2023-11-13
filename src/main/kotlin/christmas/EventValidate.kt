@@ -62,7 +62,7 @@ class EventValidate {
 
     fun menuInDrink(orderMenu: MutableMap<String, Int>, menuList: List<Menu>) {
         var drinkCheck = 0
-        orderMenu.forEach { (menuName, quantity) ->
+        orderMenu.forEach { (menuName, _) ->
             val menu = menuList.find { it.name == menuName }
             if (menu!!.category == "음료") drinkCheck += 1
         }
