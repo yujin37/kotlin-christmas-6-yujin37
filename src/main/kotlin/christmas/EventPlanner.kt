@@ -36,12 +36,12 @@ class EventPlanner {
     private fun handleEventApply() {
         SpecialEvent().presentEvent(totalCost)
         val totalProfit = EventBenefitCalculator().benefitDetails(visitDate, totalCost, orderMenu)
-        var totalResult = EventCalculator().totalDiscountCost(totalProfit)
+        EventCalculator().totalDiscountCost(totalProfit)
     }
 
     private fun handleNotApply() {
         OutputView().presentMessage("없음")
-        OutputView().BenefitMessage(mutableMapOf())
+        OutputView().benefitMessage(mutableMapOf())
         OutputView().totalProfitMessage("0")
     }
 
