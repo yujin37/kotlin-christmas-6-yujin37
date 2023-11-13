@@ -1,5 +1,6 @@
 package christmas
 
+import christmas.validate.EventValidate
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 

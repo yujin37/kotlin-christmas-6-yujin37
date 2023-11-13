@@ -1,4 +1,6 @@
-package christmas
+package christmas.validate
+
+import christmas.Menu
 
 class EventValidate {
 

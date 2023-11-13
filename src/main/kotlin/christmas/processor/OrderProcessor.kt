@@ -1,4 +1,8 @@
-package christmas
+package christmas.processor
+
+import christmas.CostFormat
+import christmas.Menu
+import christmas.view.OutputView
 
 class OrderProcessor {
     fun calculateOrder(orderMenu: MutableMap<String, Int>): Int {

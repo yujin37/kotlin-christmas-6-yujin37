@@ -1,4 +1,8 @@
-package christmas
+package christmas.calculator
+
+import christmas.events.SpecialEvent
+import christmas.events.WeeklyEvent
+import christmas.view.OutputView
 
 class EventBenefitCalculator {
 

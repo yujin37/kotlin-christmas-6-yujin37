@@ -1,6 +1,8 @@
-package christmas
+package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
+import christmas.validate.EventValidate
+import christmas.processor.MenuProcessor
 
 class InputView {
 

@@ -1,4 +1,6 @@
-package christmas
+package christmas.events
+
+import christmas.Menu
 
 class WeeklyEvent {
     fun weekendDay(orderMenu: MutableMap<String, Int>): Int {

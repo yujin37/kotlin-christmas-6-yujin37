@@ -1,4 +1,7 @@
-package christmas
+package christmas.calculator
+
+import christmas.CostFormat
+import christmas.view.OutputView
 
 class EventCalculator {
     companion object {

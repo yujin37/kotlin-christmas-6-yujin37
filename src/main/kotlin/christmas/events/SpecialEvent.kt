@@ -1,4 +1,6 @@
-package christmas
+package christmas.events
+
+import christmas.view.OutputView
 
 class SpecialEvent {
     fun presentEvent(totalCost: Int) {

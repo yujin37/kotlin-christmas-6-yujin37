@@ -1,4 +1,6 @@
-package christmas
+package christmas.view
+
+import christmas.CostFormat
 
 class OutputView {
 

@@ -1,4 +1,7 @@
-package christmas
+package christmas.processor
+
+import christmas.validate.EventValidate
+import christmas.validate.ValidateError
 
 class MenuProcessor {
 

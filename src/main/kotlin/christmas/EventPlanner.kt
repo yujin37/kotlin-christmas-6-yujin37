@@ -1,5 +1,12 @@
 package christmas
 
+import christmas.calculator.EventBenefitCalculator
+import christmas.calculator.EventCalculator
+import christmas.events.SpecialEvent
+import christmas.processor.OrderProcessor
+import christmas.view.InputView
+import christmas.view.OutputView
+
 
 class EventPlanner {
 
