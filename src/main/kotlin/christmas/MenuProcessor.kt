@@ -24,4 +24,15 @@ class MenuProcessor {
         }
         return menuList
     }
+
+    fun menuValidate(visitMenu: String): MutableMap<String, Int> {
+        return try { //메뉴 유효한지 확인
+            val checkedMenu = menuSplit(visitMenu)
+            EventValidate().validateMenu(checkedMenu)
+            checkedMenu
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            mutableMapOf()
+        }
+    }
 }
