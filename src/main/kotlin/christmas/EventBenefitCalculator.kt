@@ -2,17 +2,29 @@ package christmas
 
 class EventBenefitCalculator {
 
+    companion object {
+        const val SANTA_EVENTBADGE = 20000
+        const val TREE_EVENTBADGE = 10000
+        const val STAR_EVENTBADGE = 5000
+
+        const val PRESENT_EVENT_MIN = 120000
+        const val PRESENT_EVENT_COST = 25000
+        const val SPECIAL_EVENT_COST = 1000
+
+        const val CHRISTMAS_DAY = 25
+    }
+
     fun isWeekend(date: Int): Boolean {
         return date % 7 == 1 || date % 7 == 2
     }
 
     fun isSpecialDay(date: Int): Boolean {
-        return date % 7 == 3 || date == 25
+        return date % 7 == 3 || date == CHRISTMAS_DAY
     }
 
     fun benefitDetails(date: Int, totalCost: Int, orderMenu: MutableMap<String, Int>): MutableMap<String, Int> {
         val DecEventList = mutableMapOf<String, Int>()
-        if (date <= 25) {
+        if (date <= CHRISTMAS_DAY) {
             val christCost = SpecialEvent().chiristmasDay(date)
             DecEventList["크리스마스 디데이 할인"] = christCost
         }
@@ -29,12 +41,12 @@ class EventBenefitCalculator {
         }
 
         if (isSpecialDay(date)) {
-            val specialCost = 1000
+            val specialCost = SPECIAL_EVENT_COST
             DecEventList["특별 할인"] = specialCost
         }
 
-        if (totalCost >= 120000) {
-            DecEventList["증정 이벤트"] = 25000
+        if (totalCost >= PRESENT_EVENT_MIN) {
+            DecEventList["증정 이벤트"] = PRESENT_EVENT_COST
         }
 
         OutputView().BenefitMessage(DecEventList)
@@ -44,12 +56,11 @@ class EventBenefitCalculator {
 
     fun eventBadgeCheck(profitCost: Int) {
         var badge = "없음"
-        if (profitCost >= 20000) {
-            badge = "산타"
-        } else if (profitCost >= 10000) {
-            badge = "트리"
-        } else if (profitCost >= 5000) {
-            badge = "별"
+
+        when {
+            profitCost >= SANTA_EVENTBADGE -> badge = "산타"
+            profitCost >= TREE_EVENTBADGE -> badge = "트리"
+            profitCost >= STAR_EVENTBADGE -> badge = "별"
         }
 
         OutputView().eventBadgeMessage(badge)
