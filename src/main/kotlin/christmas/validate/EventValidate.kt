@@ -67,7 +67,7 @@ class EventValidate {
         orderMenu.forEach { (_, quantity) ->
             quantityCheck += quantity
         }
-        require(quantityCheck < LIMIT_PER_ORDER_QUANTITY) {
+        require(quantityCheck <= LIMIT_PER_ORDER_QUANTITY) {
             ValidateError.LIMIT_MENU_ORDER.message
         }
     }
