@@ -5,7 +5,7 @@ import christmas.events.SpecialEvent
 import christmas.events.WeeklyEvent
 import christmas.view.OutputView
 
-class EventBenefitCalculator {
+class EventBenefitCalculator(private val params: EventParameters) {
 
     companion object {
         const val SANTA_EVENTBADGE = 20000
@@ -65,7 +65,7 @@ class EventBenefitCalculator {
         return DecEventList
     }
 
-    fun benefitDetails(params: EventParameters): MutableMap<String, Int> {
+    fun benefitDetails(): MutableMap<String, Int> {
         var DecEventList = mutableMapOf<String, Int>()
         DecEventList = benefitChristmas(params, DecEventList)
         DecEventList = benefitWeek(params, DecEventList)

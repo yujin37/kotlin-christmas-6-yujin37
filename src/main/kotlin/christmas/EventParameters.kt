@@ -1,8 +1,8 @@
 package christmas
 
 data class EventParameters (
-    val date: Int,
-    val totalCost: Int,
-    val orderMenu: MutableMap<String, Int>
+    var date: Int,
+    var totalCost: Int,
+    var orderMenu: MutableMap<String, Int>
 
     )
