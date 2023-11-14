@@ -27,7 +27,7 @@ class EventBenefitCalculator(private val params: EventParameters) {
         return date % 7 == 3 || date == CHRISTMAS_DAY
     }
 
-    fun benefitChristmas(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+    private fun benefitChristmas(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
         if (params.date <= CHRISTMAS_DAY) {
             val christCost = SpecialEvent().christmasDay(params.date)
             DecEventList["크리스마스 디데이 할인"] = christCost
@@ -35,7 +35,7 @@ class EventBenefitCalculator(private val params: EventParameters) {
         return DecEventList
     }
 
-    fun benefitWeek(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+    private fun benefitWeek(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
         if (isWeekend(params.date)) {
             val weekendCost = WeeklyEvent().weekendDay(params.orderMenu)
             if (weekendCost > 0) {
@@ -50,7 +50,7 @@ class EventBenefitCalculator(private val params: EventParameters) {
         return DecEventList
     }
 
-    fun benefitSpecial(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+    private fun benefitSpecial(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
         if (isSpecialDay(params.date)) {
             val specialCost = SPECIAL_EVENT_COST
             DecEventList["특별 할인"] = specialCost
@@ -58,7 +58,7 @@ class EventBenefitCalculator(private val params: EventParameters) {
         return DecEventList
     }
 
-    fun benefitPresent(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+    private fun benefitPresent(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
         if (params.totalCost >= PRESENT_EVENT_MIN) {
             DecEventList["증정 이벤트"] = PRESENT_EVENT_COST
         }
