@@ -1,5 +1,6 @@
 package christmas.calculator
 
+import christmas.EventParameters
 import christmas.events.SpecialEvent
 import christmas.events.WeeklyEvent
 import christmas.view.OutputView
@@ -26,32 +27,50 @@ class EventBenefitCalculator {
         return date % 7 == 3 || date == CHRISTMAS_DAY
     }
 
-    fun benefitDetails(date: Int, totalCost: Int, orderMenu: MutableMap<String, Int>): MutableMap<String, Int> {
-        val DecEventList = mutableMapOf<String, Int>()
-        if (date <= CHRISTMAS_DAY) {
-            val christCost = SpecialEvent().christmasDay(date)
+    fun benefitChristmas(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+        if (params.date <= CHRISTMAS_DAY) {
+            val christCost = SpecialEvent().christmasDay(params.date)
             DecEventList["크리스마스 디데이 할인"] = christCost
         }
-        if (isWeekend(date)) {
-            val weekendCost = WeeklyEvent().weekendDay(orderMenu)
+        return DecEventList
+    }
+
+    fun benefitWeek(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+        if (isWeekend(params.date)) {
+            val weekendCost = WeeklyEvent().weekendDay(params.orderMenu)
             if (weekendCost > 0) {
                 DecEventList["주말 할인"] = weekendCost
             }
         } else {
-            val weekCost = WeeklyEvent().weekDay(orderMenu)
+            val weekCost = WeeklyEvent().weekDay(params.orderMenu)
             if (weekCost > 0) {
                 DecEventList["평일 할인"] = weekCost
             }
         }
+        return DecEventList
+    }
 
-        if (isSpecialDay(date)) {
+    fun benefitSpecial(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+        if (isSpecialDay(params.date)) {
             val specialCost = SPECIAL_EVENT_COST
             DecEventList["특별 할인"] = specialCost
         }
+        return DecEventList
+    }
 
-        if (totalCost >= PRESENT_EVENT_MIN) {
+    fun benefitPresent(params: EventParameters, DecEventList: MutableMap<String, Int>): MutableMap<String, Int> {
+        if (params.totalCost >= PRESENT_EVENT_MIN) {
             DecEventList["증정 이벤트"] = PRESENT_EVENT_COST
         }
+        return DecEventList
+    }
+
+    fun benefitDetails(params: EventParameters): MutableMap<String, Int> {
+        var DecEventList = mutableMapOf<String, Int>()
+        DecEventList = benefitChristmas(params, DecEventList)
+        DecEventList = benefitWeek(params, DecEventList)
+        DecEventList = benefitSpecial(params, DecEventList)
+        DecEventList = benefitPresent(params, DecEventList)
 
         OutputView().benefitMessage(DecEventList)
 
